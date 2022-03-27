@@ -1,13 +1,18 @@
 {
-    "name": "leafo/lessphp",
+    "name": "zebratrois/lessphp",
     "type": "library",
-    "description": "lessphp is a compiler for LESS written in PHP.",
-    "homepage": "http://leafo.net/lessphp/",
+    "description": "lessphp is a compiler for LESS written in PHP - Forked to add PHP8.1 compat",
+    "homepage": "https://github.com/zebratrois/lessphp",
     "license": [
         "MIT",
         "GPL-3.0"
     ],
     "authors": [
+        {
+            "name": "Romain Guillard",
+            "email": "romain@romainguillard.net",
+            "homepage": "https://romainguillard.net"
+        },
         {
             "name": "Leaf Corcoran",
             "email": "leafot@gmail.com",
