@@ -65,6 +65,14 @@ class lessc {
 
     static protected $nextImportId = 0; // uniquely identify imports
 
+    public $_parseFile;
+    public $formatter;
+    public $formatterName;
+    public $env;
+    public $parser;
+    public $scope;
+
+
     // attempts to find the path of an import url, returns null for css files
     protected function findImport($url) {
         foreach ((array)$this->importDir as $dir) {
@@ -1363,7 +1371,7 @@ class lessc {
                     $name = $name . ": ";
                 }
 
-                $this->throwError("${name}expecting $expectedArgs arguments, got $numValues");
+                $this->throwError("{$name} expecting $expectedArgs arguments, got $numValues");
             }
 
             return $values;
@@ -1745,7 +1753,7 @@ class lessc {
         }
 
         // type based operators
-        $fname = "op_${ltype}_${rtype}";
+        $fname = "op_{$ltype}_{$rtype}";
         if (is_callable(array($this, $fname))) {
             $out = $this->$fname($op, $left, $right);
             if (!is_null($out)) return $out;
@@ -2410,6 +2418,19 @@ class lessc_parser {
 
     protected $blockDirectives = array("font-face", "keyframes", "page", "-moz-document", "viewport", "-moz-viewport", "-o-viewport", "-ms-viewport");
     protected $lineDirectives = array("charset");
+
+    public $eatWhiteDefault;
+    public $lessc;
+    public $sourceName;
+    public $writeComments;
+    public $count;
+    public $env;
+    public $line;
+    public $buffer;
+    public $seenComments;
+    public $inExp;
+
+
 
     /**
      * if we are in parens we can be more liberal with whitespace around
@@ -3866,6 +3887,7 @@ class lessc_formatter_compressed extends lessc_formatter_classic {
     public $assignSeparator = ":";
     public $break = "";
     public $compressColors = true;
+    public $indentLevel;
 
     public function indentStr($n = 0) {
         return "";
